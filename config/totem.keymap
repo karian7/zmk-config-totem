@@ -27,6 +27,27 @@
         };
     };
 
+    combos {
+        compatible = "zmk,combos";
+
+        // Q+W pressed together -> Esc (base layer only)
+        combo_esc {
+            timeout-ms = <30>;
+            key-positions = <0 1>;
+            bindings = <&kp ESC>;
+            layers = <0>;
+        };
+
+        // K+L pressed together -> Backspace (base layer only).
+        // J+K is avoided: IdeaVim maps the jk sequence to Esc.
+        combo_bspc {
+            timeout-ms = <30>;
+            key-positions = <17 18>;
+            bindings = <&kp BACKSPACE>;
+            layers = <0>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
