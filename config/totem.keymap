@@ -80,6 +80,17 @@
             bindings = <&kp BACKSPACE>;
             layers = <0>;
         };
+
+        // L+; pressed together -> Enter (base layer only). L is shared with
+        // the K+L combo. An Enter that does not go through a layer key.
+        // Prior idle keeps rolls such as Java "null;" typing letters.
+        combo_enter {
+            timeout-ms = <30>;
+            require-prior-idle-ms = <150>;
+            key-positions = <18 19>;
+            bindings = <&kp ENTER>;
+            layers = <0>;
+        };
     };
 
     keymap {
