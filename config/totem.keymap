@@ -59,14 +59,14 @@
     combos {
         compatible = "zmk,combos";
 
-        // Q+W pressed together -> Esc (base layer only).
+        // Q+W pressed together -> Tab (base layer only). Esc stays on SYM+Q.
         // require-prior-idle-ms keeps in-word rolls (Korean ㅂ+ㅈ, vim :wq)
         // typing letters; a combo needs a short pause after the last key.
-        combo_esc {
+        combo_tab {
             timeout-ms = <30>;
             require-prior-idle-ms = <150>;
             key-positions = <0 1>;
-            bindings = <&kp ESC>;
+            bindings = <&kp TAB>;
             layers = <0>;
         };
 
