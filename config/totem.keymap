@@ -26,46 +26,19 @@
             display-name = "Alfred/Option";
         };
 
-        // App switcher on SYM (zmk-tri-state module): T steps forward (right, Tab),
-        // R steps back (left, Shift+Tab). Either one opens the switcher and holds Cmd;
-        // pressing the other keeps it open; releasing SYM (or any other key) releases
-        // Cmd. Cmd is held with press/release macros, not &kt, so the two swappers can
-        // run together: ZMK counts explicit modifier presses and releases Cmd only when
-        // both have let go.
-        swap_fwd: swap_fwd {
+        // SYM+T: Cmd+Tab app switcher (zmk-tri-state module). The first press holds
+        // Cmd and taps Tab (forward, right), later presses tap Tab. SYM+R is Shift+Tab:
+        // inside a switch it steps back (Cmd is already held) without ending it.
+        // Releasing SYM, or any other key, releases Cmd.
+        swapper: swapper {
             compatible = "zmk,behavior-tri-state";
             #binding-cells = <0>;
-            bindings = <&cmd_hold>, <&kp TAB>, <&cmd_release>;
+            bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
             ignored-key-positions = <3>;
-        };
-
-        swap_back: swap_back {
-            compatible = "zmk,behavior-tri-state";
-            #binding-cells = <0>;
-            bindings = <&cmd_hold>, <&kp LS(TAB)>, <&cmd_release>;
-            ignored-key-positions = <4>;
         };
     };
 
     macros {
-        // Press Cmd and leave it pressed (app switcher start).
-        cmd_hold: cmd_hold {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <0>;
-            tap-ms = <0>;
-            bindings = <&macro_press &kp LGUI>;
-        };
-
-        // Release the Cmd that cmd_hold pressed (app switcher end).
-        cmd_release: cmd_release {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <0>;
-            tap-ms = <0>;
-            bindings = <&macro_release &kp LGUI>;
-        };
-
         // NAV that also holds F19 while the layer is on, so the host can
         // see the layer change (totem-typing keymap overlay).
         nav_sig: nav_sig {
@@ -154,7 +127,7 @@
 
         sym_func {
             bindings = <
-           &kp ESC        &kp LEFT_BRACE        &kp RIGHT_BRACE        &swap_back        &swap_fwd         &kp F1   &kp F2           &kp F3   &kp F4   &kp F5
+           &kp ESC        &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp LS(TAB)       &swapper          &kp F1   &kp F2           &kp F3   &kp F4   &kp F5
            &kp TAB        &kp LBKT              &kp RBKT               &kp ENTER         &kp BSLH          &kp F6   &kp F7           &kp F8   &kp F9   &kp F10
 &kp GRAVE  &kp LESS_THAN  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp GREATER_THAN  &kp UNDERSCORE    &kp F11  &kp F12          &kp F13  &kp F14  &kp F15  &kp F16
                                                 &trans                 &trans            &trans            &none    &kp RIGHT_SHIFT  &none
