@@ -8,6 +8,15 @@ config ZMK_SPLIT_ROLE_CENTRAL
 
 endif
 
+# The right half has no name of its own, so on USB it showed up as "Generic CDC".
+# A name lets the Mac tell a cabled right half apart from any other ZMK board.
+if SHIELD_TOTEM_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "TOTEM Right"
+
+endif
+
 if SHIELD_TOTEM_LEFT || SHIELD_TOTEM_RIGHT
 
 config ZMK_SPLIT
