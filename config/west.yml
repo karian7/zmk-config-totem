@@ -2,6 +2,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: urob
+      url-base: https://github.com/urob
     # Additional modules containing boards/shields/custom code can be listed here as well
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
   projects:
@@ -9,5 +11,9 @@ manifest:
       remote: zmkfirmware
       revision: 4de313367288aad5aeaa1243890e40dc813f7008 # ZMK main on 2026-11-15, the last flashed build
       import: app/west.yml
+    # Tri-state behavior (Cmd+Tab swapper on SYM+R). main is tested against ZMK main.
+    - name: zmk-tri-state
+      remote: urob
+      revision: c08969627245adeddbcdb6dfc1a4c167c04160e2 # main on 2026-09-10
   self:
     path: config
