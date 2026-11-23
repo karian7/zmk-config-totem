@@ -26,6 +26,23 @@
             display-name = "Alfred/Option";
         };
 
+        // Left outer thumb. tap: Cmd+Space (input source toggle, macOS
+        // shortcut 61), hold: Cmd. Balanced, so a Cmd shortcut stays Cmd only
+        // while Cmd is held until the other key is released; letting Cmd go
+        // first inside the tapping term sends Cmd+Space and the letter. Not
+        // hold-preferred: tapping into the next letter (Korean ㅂ is Q) would
+        // fire Cmd+Q. No hold-while-undecided: Karabiner switches to ABC
+        // whenever Cmd is released while Korean is on, so an early Cmd press
+        // and release would turn the Cmd+Space after it back into Korean.
+        cmd_lang: cmd_lang {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Cmd/Lang";
+        };
+
         // SYM+T: Cmd+Tab app switcher (zmk-tri-state module). The first press holds
         // Cmd and taps Tab (forward, right), later presses tap Tab. SYM+R is Shift+Tab:
         // inside a switch it steps back (Cmd is already held) without ending it.
@@ -112,7 +129,7 @@
            &kp Q  &kp W  &kp E     &kp R  &kp T    &kp Y      &kp U            &kp I          &kp O    &kp P
            &kp A  &kp S  &kp D     &kp F  &kp G    &kp H      &kp J            &kp K          &kp L    &kp SEMI
 &kp LCTRL  &kp Z  &kp X  &kp C     &kp V  &kp B    &kp N      &kp M            &kp COMMA      &kp DOT  &kp FSLH  &kp APOS
-                         &kp LGUI  &sym_sig  &nav_sig    &kp SPACE  &kp RIGHT_SHIFT  &alfred_opt RALT LA(LS(RET))
+                         &cmd_lang LGUI LG(SPACE)  &sym_sig  &nav_sig    &kp SPACE  &kp RIGHT_SHIFT  &alfred_opt RALT LA(LS(RET))
             >;
         };
 
