@@ -1,0 +1,10 @@
+# Host-triggered bootloader entry (decision 0062).
+
+config TOTEM_HOST_BOOTLOADER
+	bool "Reboot into the UF2 bootloader when the host sets 1200 baud"
+	default y
+	depends on USB_CDC_ACM
+	select CDC_ACM_DTE_RATE_CALLBACK_SUPPORT
+	help
+	  Opens a CDC ACM serial port at 1200 baud from the USB host to reboot
+	  this half into its UF2 bootloader, same as the &bootloader behavior.

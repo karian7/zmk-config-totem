@@ -1,0 +1,1 @@
+target_sources_ifdef(CONFIG_TOTEM_HOST_BOOTLOADER app PRIVATE src/host_bootloader.c)

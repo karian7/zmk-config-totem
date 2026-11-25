@@ -1,0 +1,4 @@
+name: totem-host-bootloader
+build:
+  cmake: .
+  kconfig: Kconfig
